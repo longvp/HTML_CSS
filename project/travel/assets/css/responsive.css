@@ -1,0 +1,24 @@
+
+/* MOBILE AND TABLET */
+@media (max-width: 1120px){
+
+    .header-main{
+        text-align: center;
+    }
+
+    .header-nav{
+        display: none;
+    }
+
+   
+}
+
+/* TABLET */
+@media (min-width: 740px) and (max-width: 1023px){
+
+}
+
+/* MOBILE */
+@media (max-width: 739px){
+    
+}

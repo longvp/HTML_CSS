@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./level-2.css">
+    <script src="./fontawsome.js"></script>
+</head>
+<body>
+    <div id="toast"></div>
+    <div>
+        <button class="btn btn--success">SHOW SUCCESS</button>
+        <button class="btn btn--info">SHOW INFO</button>
+        <button class="btn btn--warn">SHOW WARING</button>
+        <button class="btn btn--error">SHOW ERROR</button>
+    </div>
+    <!-- <div> -->
+        <!-- SUCCESS BEGIN -->
+        <!-- <div class="toast toast--success">
+            <div class="toast__icon">
+                <i class="fas fa-check-circle"></i>
+            </div>
+            <div class="toast__body">
+                <h3 class="toast__title">Sucess</h3>
+                <p class="toast__msg">The Success</p>
+            </div>
+            <div class="toast__close">
+                <i class="fas fa-times"></i>
+            </div>
+        </div> -->
+        <!-- SUCCESS END -->
+        <!-- INFO BEGIN -->
+        <!-- <div class="toast toast--info">
+            <div class="toast__icon">
+                <i class="fas fa-info-circle"></i>
+            </div>
+            <div class="toast__body">
+                <h3 class="toast__title">Info</h3>
+                <p class="toast__msg">The next generation of the web’s favorite icon library</p>
+            </div>
+            <div class="toast__close">
+                <i class="fas fa-times"></i>
+            </div>
+        </div> -->
+        <!-- INFO END -->
+        <!-- WARNING BEGIN -->
+        <!-- <div class="toast toast--warning">
+            <div class="toast__icon">
+                <i class="fas fa-exclamation-circle"></i>
+            </div>
+            <div class="toast__body">
+                <h3 class="toast__title">Warning</h3>
+                <p class="toast__msg">The next generation of the web’s favorite icon library</p>
+            </div>
+            <div class="toast__close">
+                <i class="fas fa-times"></i>
+            </div>
+        </div> -->
+        <!-- WARNING END -->
+        <!-- ERROR BEGIN -->
+        <!-- <div class="toast toast--error">
+            <div class="toast__icon">
+                <i class="fas fa-bug"></i>
+            </div>
+            <div class="toast__body">
+                <h3 class="toast__title">Errors</h3>
+                <p class="toast__msg">The next generation of the web’s favorite icon library</p>
+            </div>
+            <div class="toast__close">
+                <i class="fas fa-times"></i>
+            </div>
+        </div> -->
+        <!-- ERROR END -->
+    <!-- </div> -->
+
+
+    <script>
+
+        function toast({title = "", message = "", type = "", duration = 3000}){
+            const main = document.querySelector("#toast");
+
+            if(main){
+                const toast = document.createElement("div");
+
+                const autoRemove = setTimeout(function(){
+                    main.removeChild(toast);
+                }, duration + 1000);
+
+                toast.onclick = function(e){
+                    if(e.target.closest(".toast__close")){
+                        main.removeChild(toast);
+                        clearTimeout(autoRemove);
+                    }
+                };
+
+                const icons = {
+                    success: "fas fa-check-circle",
+                    info: "fas fa-info-circle",
+                    warning: "fas fa-exclamation-circle",
+                    error: "fas fa-bug"
+                };
+                const icon = icons[type];
+                const delay = (duration/1000).toFixed(2);
+                toast.classList.add("toast", `toast--${type}`);
+                toast.style.animation = `fadeIn ease 0.3s, fadeOut linear 1s ${delay}s forwards    `;
+                toast.innerHTML = 
+                   ` <div class="toast__icon">
+                        <i class="${icon}"></i>
+                    </div>
+                    <div class="toast__body">
+                        <h3 class="toast__title">${title}</h3>
+                        <p class="toast__msg">${message}</p>
+                    </div>
+                    <div class="toast__close">
+                        <i class="fas fa-times"></i>
+                    </div> `;
+                main.appendChild(toast);
+            }
+        }
+
+//-----------------------------------------------------------------------------------------------
+
+        function showSuccess(){
+            toast({
+                title: "Success",
+                message: "The next generation of the web’s favorite icon library",
+                type: "success",
+                duration: 5000
+            })
+        }
+
+        function showInfo(){
+            toast({
+                title: "Info",
+                message: "The next generation of the web’s favorite icon library",
+                type: "info",
+                duration: 5000
+            })
+        }
+
+        function showWarning(){
+            toast({
+                title: "Warning",
+                message: "The next generation of the web’s favorite icon library",
+                type: "warning",
+                duration: 5000
+            })
+        }
+
+        function showError(){
+            toast({
+                title: "Error",
+                message: "The next generation of the web’s favorite icon library",
+                type: "error",
+                duration: 5000
+            })
+        }
+
+        const btnSuccess = document.querySelector(".btn--success");
+        btnSuccess.addEventListener("click", function(){
+            showSuccess();
+        });
+
+        const btnInfo = document.querySelector(".btn--info");
+        btnInfo.addEventListener("click", function(){
+            showInfo();
+        });
+
+        const btnWarning = document.querySelector(".btn--warn");
+        btnWarning.addEventListener("click", function(){
+            showWarning();
+        });
+
+        const btnError = document.querySelector(".btn--error");
+        btnError.addEventListener("click", function(){
+            showError();
+        });
+
+    </script>
+
+</body>
+</html>
